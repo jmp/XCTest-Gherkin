@@ -28,6 +28,7 @@ matrix:
 script:
 - set -o pipefail
 - travis/validate_carthage.sh
+- swift test
 - xcodebuild -destination "$DESTINATION" -workspace Example/XCTest-Gherkin.xcworkspace -scheme XCTest-Gherkin-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO test | xcpretty -f `xcpretty-gherkin-formatter/bin/xcpretty-gherkin-formatter`
 - if [ $UI ]; then xcodebuild -destination "$DESTINATION" -workspace Example/XCTest-Gherkin.xcworkspace -scheme XCTest-Gherkin-Example-UI -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO test | xcpretty -f `xcpretty-gherkin-formatter/bin/xcpretty-gherkin-formatter`; fi
 - bundle exec pod lib lint
